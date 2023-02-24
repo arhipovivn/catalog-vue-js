@@ -6,8 +6,9 @@
     VCatalogItem и в его данные засовывает каждый новый объект чтолежит  в массиве  products -->
     <!-- @sendArticle="showArticle"- так происзодит связывание того что передает ребенок родителю  -->
 <!-- т.е при нажатии на кнопку в ребенке в функции showArticle я описал что делать в родителе -->
-    <VCatalogItem
-    v-for="product in products"
+<!-- v-for="product in this.$store.state.products" заменил на PRODUCTS в computed -->
+  <VCatalogItem
+    v-for="product in PRODUCTS"
     :key="product.article"
     :product_data="product" 
     @sendArticle="showArticle"
@@ -16,66 +17,29 @@
 </template>
 <script>
 import VCatalogItem from './v-catalog-item.vue';
+import{mapActions,mapGetters} from 'vuex';
 export default {
-    methods:{
-showArticle(elem){
-console.log(elem)
-}
-    },
     name: "v-catalog",
-    data() {
-        return {
-            
-  products: [
-    {
-      image: "1.jpg",
-      name: "T-shirt 1",
-      price: 2100.234234234,
-      article: "T1",
-      available: true,
-      category: "Мужские"
+    computed: {
+        ...mapGetters(['PRODUCTS'])
     },
-    {
-      image: "2.jpg",
-      name: "T-shirt 2",
-      price: 3150.12312412,
-      article: "T2",
-      available: true,
-      category: "Женские"
-    },
-    {
-      image: "3.jpg",
-      name: "T-shirt 5",
-      price: 6500.3522314,
-      article: "T3",
-      available: false,
-      category: "Женские"
-    }, {
-      image: "4.jpg",
-      name: "T-shirt 1",
-      price: 2100.234234234,
-      article: "T4",
-      available: true,
-      category: "Мужские"
-    },
-    {
-      image: "5.jpg",
-      name: "T-shirt 2",
-      price: 3150.12312412,
-      article: "T5",
-      available: true,
-      category: "Женские"
-    },
-    {
-      image: "6.jpg",
-      name: "T-shirt 5",
-      price: 6500.3522314,
-      article: "T6",
-      available: false,
-      category: "Женские"
-    }
-  ]
+    methods:{
+    ...mapActions(['GET_PRODUCTS_FROM_API']),//  это сделано для простоты обращения к методу GET_PRODUCTS_FROM_API 
+showArticle(data){
+console.log(data)
 }
+    },
+    mounted(){ //  когда отрендорился весь хтмл будет выполняться то что написано тут 
+        this.GET_PRODUCTS_FROM_API()
+        .then((response)=>{// проверка на полученные данные, если данные пришли то выведет в консоль 
+            if(response){
+                console.log("данные получены")
+            }
+        })
+
+    },
+    data() {
+        return {}
 
 },
 components: { VCatalogItem }
