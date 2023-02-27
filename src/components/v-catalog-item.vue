@@ -8,7 +8,7 @@
     <p class="v-catalog-item-name">{{product_data.name}}</p>
     <p class="v-catalog-item-price">price: {{ product_data.price }}</p>
     <button 
-    @click="sendDataToParent"
+    @click="addToCart"
     class="v-catalog-item-add_to_cart_btn btn">Add cart</button>
     </div>
 </template>
@@ -24,10 +24,13 @@ export default {
         }
     },
     methods:{
-        sendDataToParent(){
-          this.$emit('sendArticle', this.product_data.article)  //вызываю эмитер 
-          //в котором указываю что хочу передать 2-м аргументом,
-          // а 1-й аргумент как это будет называться в родителе 
+        // sendDataToParent(){
+        //   this.$emit('sendArticle', this.product_data.article)  //вызываю эмитер 
+        //   //в котором указываю что хочу передать 2-м аргументом,
+        //   // а 1-й аргумент как это будет называться в родителе 
+        // }
+        addToCart(){
+            this.$emit('addToCart', this.product_data);
         }
     }
     }
