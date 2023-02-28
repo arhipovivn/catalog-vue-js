@@ -55,7 +55,8 @@
       "price": 8700.4124123,
       "article": "T6",
       "available": true,
-      "category": "Женские",      "quantity": 0
+      "category": "Женские",    
+      "quantity": 0
 
     }
   ]

@@ -1,5 +1,12 @@
 <template>
+        {{ title }}
     <div class="v-catalog">
+
+    <router-link 
+    :to ="{name:'cart',params:{cart_data:CART}}" >
+
+    <div class="v-catalog_link">Cart: {{ CART.length }}</div>
+    </router-link>
     <!-- циклом по массиву в key уникальное знаечение(не может быть 2-х ключей с одинаковыми значениями) -->
     <!-- :product_data="product" мы связываем product_data дочернего эл та с product родительского  -->
    <!-- на каждой итерации  создает отдельный новый компонент
@@ -16,12 +23,19 @@
     </div>
 </template>
 <script>
+
 import VCatalogItem from './v-catalog-item.vue';
-import{mapActions,mapGetters} from 'vuex';
+import{mapActions} from 'vuex';
+import{mapGetters} from 'vuex'
+
+
 export default {
     name: "v-catalog",
     computed: {
-        ...mapGetters(['PRODUCTS'])
+        ...mapGetters([
+            'PRODUCTS',
+            'CART'
+    ]),
     },
     methods:{
     ...mapActions(['GET_PRODUCTS_FROM_API','ADD_TO_CART']),//  это сделано для простоты обращения к методу GET_PRODUCTS_FROM_API 
@@ -39,7 +53,9 @@ this.ADD_TO_CART(data)
 
     },
     data() {
-        return {}
+        return{
+        title :'CATALOG'
+       } 
 
 },
 components: { VCatalogItem }
@@ -53,6 +69,14 @@ components: { VCatalogItem }
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
-
+    
 }
+.v-catalog_link{
+            position: absolute;
+            top:10px;
+            right: 10px;
+            padding: 16px;
+            border: solid 1px gray;
+        }
+
 </style>

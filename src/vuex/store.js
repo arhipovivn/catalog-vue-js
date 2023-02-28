@@ -6,7 +6,8 @@ state: {
      cart:[] // корзина
 },// состояние в нем хранятся переменные массивы объекты
 mutations:{
-    REMOVE_FROM_CART:(state,index)=>{// удаляю элемент из корзины
+    REMOVE_FROM_CART:(state,index)=>{
+        // удаляю элемент из корзины
 state.cart.splice(index,1)
     },
    SET_CART:(state,product)=>{// добавляю элемент в корзины 

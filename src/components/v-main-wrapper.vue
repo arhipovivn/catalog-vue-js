@@ -1,42 +1,41 @@
 <template>
     <div class="v-main-wrapper">
-    {{ title }}
-    <VCatalog/>
+   <h1>
+   </h1> 
+   <!-- в этой области показываются компоненты в зависимости от адреса т.е либо карт или каталог  -->
+   <!-- <keep-alive> сохранение состояния при изменении урл -->
+
+  <keep-alive>
+   <router-view></router-view>
+  </keep-alive>
+    <!-- <VCatalog/> -->
     <!-- если корзина пута то она не выводится -->
     <!-- :cart_data="CART" связал родительский с дочерним  -->
-    <VCart
+    <!-- <VCart
       v-if="CART.length"
       :cart_data="CART"
-    />
+    /> -->
     </div>
 </template>
 <script>
-import VCatalog from './v-catalog'
-import VCart from './v-cart.vue';
+// import VCatalog from './v-catalog'
+// import VCart from './v-cart.vue';
 import{mapGetters} from 'vuex';//чтобы поймать геттер корзины
 export default {
     name:"v-main-wrapper",
-  components: { VCatalog, 
-    VCart },
-    props:{
-
-    },
+  components: { 
+    //VCatalog, 
+    // VCart
+   },
     data(){
        return{
-        title :'main-wrapper'
+        title :'CATALOG'
        } 
     }, 
      computed :{
       ...mapGetters(['CART'])// сюда положили товар 
 
-    },
-    methods:{
-
-    },
-    watch:{
-
     }
-
 }
 </script>
 <style> 
