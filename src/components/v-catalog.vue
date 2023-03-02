@@ -1,10 +1,9 @@
 <template>
         {{ title }}
     <div class="v-catalog">
-
+    <!-- ссылка на нужную страницу, с именетм карт и пропсами в params -->
     <router-link 
     :to ="{name:'cart',params:{cart_data:CART}}" >
-
     <div class="v-catalog_link">Cart: {{ CART.length }}</div>
     </router-link>
     <!-- циклом по массиву в key уникальное знаечение(не может быть 2-х ключей с одинаковыми значениями) -->
@@ -23,12 +22,9 @@
     </div>
 </template>
 <script>
-
 import VCatalogItem from './v-catalog-item.vue';
 import{mapActions} from 'vuex';
 import{mapGetters} from 'vuex'
-
-
 export default {
     name: "v-catalog",
     computed: {

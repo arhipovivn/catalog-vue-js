@@ -16,9 +16,12 @@
 <div class="v-cart-item_quantity">
 <p>Qty:
 </p>
-{{ this.cart_item_data.quantity }}
+<span>
+   <span class="span_btn" @click="decrimentItem">–</span> 
+    {{ this.cart_item_data.quantity }} <span class="span_btn" @click="incrimentItem">+</span>
+</span> 
 </div>
-<button
+<button class="btn"
 @click="removeEl"
 >delete</button>
        </div>
@@ -35,8 +38,14 @@ export default {
         }
     },
     methods: {
+        decrimentItem(){
+            this.$emit('decriment') // сообщаю родителю о таком событии  т.е о том что надо уменьшить значение на -1
+        },
+        incrimentItem(){
+            this.$emit('incriment')// сообщаю родителю о таком событии 
+        },
         removeEl(){
-            this.$emit('removeEl')
+            this.$emit('removeEl')// сообщаю родителю о таком событии 
         }
     },
     computed(){},
@@ -60,6 +69,18 @@ export default {
 
         max-width: 50px ;
     
+    }
+    .span_btn{
+        cursor: pointer;
+        width: 15px;
+        height: 15px;
+        background-color: gray;
+        padding: 8px;
+        margin: 10px;
+        border-radius: 5px;
+    }
+    .span_btn:hover{
+       background-color: #c9c2c2;
     }
 }
 </style>

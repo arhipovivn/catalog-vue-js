@@ -6,6 +6,24 @@ state: {
      cart:[] // корзина
 },// состояние в нем хранятся переменные массивы объекты
 mutations:{
+    INCRIMENT:(state,index)=>{
+state.cart[index].quantity++
+    },
+    DECRIMENT:(state,index)=>{
+        if(state.cart[index].quantity>1)
+        state.cart[index].quantity--
+
+    // setPriceDescription () {
+    //   const slugs = this.$route.path.split('/')
+    //   for (let i = 0; i < slugs.length; ++i) {
+    //     const item = slugs[i]
+    //     if (item === 'chernyj-metalloprokat') {
+    //       return '*Цены указанные на сайте соответствуют ценам прейскуранта б/н от 03.11.2022'
+    //     }
+    //   }
+    //   return '*Цены указанные на сайте соответствуют ценам прейскуранта б/н от 03.10.2022'
+    // }
+    },
     REMOVE_FROM_CART:(state,index)=>{
         // удаляю элемент из корзины
 state.cart.splice(index,1)
@@ -40,6 +58,14 @@ actions:{// для получения данных создаю действие
         commit('SET_CART',product)
 
     },
+DECRIMENTITEM_ITEM:({commit},index)=>{
+    commit('DECRIMENT',index)
+},
+INCRIMENTITEM_ITEM:({commit},index)=>{
+    commit('INCRIMENT',index)
+
+
+},
 GET_PRODUCTS_FROM_API({commit}){
 return axios('http://localhost:3000/products',{ // аксиос запрос с параметром get по урл, у аксиоса 2 аргумента один урл дальше настройки 
 method:"GET" 
