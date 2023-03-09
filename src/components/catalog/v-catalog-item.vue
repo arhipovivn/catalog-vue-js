@@ -2,7 +2,7 @@
     <div class="v-catalog-item">
         <!-- requaerдля того чтобы путь был верный и все картинки отображались -->
     <img  class="v-catalog-item-img"
-    :src="require('../assets/images/'+product_data.image)" 
+    :src="require('../../assets/images/'+product_data.image)" 
     alt="img">
         <!-- product_data сюдя помещаются данные объекта и мы к ним обращаемся -->
     <p class="v-catalog-item-name">{{product_data.name}}</p>
